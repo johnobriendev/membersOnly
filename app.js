@@ -1,6 +1,13 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
 var path = require('path');
+//const User = require('./models/user');
+//const authRouter = require('./routes/auth');
+//const messageRouter = require('./routes/messages');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -8,6 +15,11 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+const mongoDb = process.env.MONGODB_URI;
+mongoose.connect(mongoDb);
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "mongo connection error"));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
