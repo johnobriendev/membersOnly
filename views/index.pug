@@ -5,9 +5,18 @@ block content
   p Welcome to #{title}
 
   if user
-    p Welcome, #{user.username}!
+    p Welcome, #{user.firstName}
+    p
+      a(href="/users/join") Join Club
+    p
+      a(href="/messages/new") Create New Message
+    p
+      a(href="/log-out") Log Out
   else
-    p Welcome, guest!
+    p
+      a(href="/auth/sign-up") Sign Up
+    p
+      a(href="/auth/log-in") Log In
   ul
     each message in messages
       li= message.title
