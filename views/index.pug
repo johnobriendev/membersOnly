@@ -3,3 +3,18 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  if user
+    p Welcome, #{user.username}!
+  else
+    p Welcome, guest!
+  ul
+    each message in messages
+      li= message.title
+      p= message.text
+      if user
+        p= `By: ${message.author.username}`
+        p= `Date: ${message.createdAt}`
+      else
+        p Author: Hidden
+        p Date: Hidden
