@@ -23,8 +23,6 @@ mongoose.connect(mongoDb);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
 
-// Set up Passport
-require('./config/passport')(passport);
 
 //session middleware
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
