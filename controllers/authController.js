@@ -43,13 +43,13 @@ exports.sign_up_post = [
 
 // Display login form
 exports.log_in_get = (req, res) => {
-  res.render('log-in');
+  res.render('login');
 };
 
 // Handle login form submission
 exports.log_in_post = passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/log-in',
+  failureRedirect: '/login',
   failureFlash: true
 });
 
