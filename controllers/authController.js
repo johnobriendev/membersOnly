@@ -12,7 +12,7 @@ exports.sign_up_post = [
   // Validation and sanitization
   body('first_name').trim().isLength({ min: 3, max: 50 }).withMessage('First name must be between 3 and 50 characters.'),
   body('last_name').trim().isLength({ min: 3, max: 50 }).withMessage('Last name must be between 3 and 50 characters.'),
-  body('email').isEmail().withMessage('Email must be valid.').normalizeEmail(),
+  body('username').isLength({ min: 3 }).withMessage('Username must be at least 3 characters long.'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long.'),
   body('confirmPassword').custom((value, { req }) => {
     if (value !== req.body.password) {
@@ -30,7 +30,7 @@ exports.sign_up_post = [
       const user = new User({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        email: req.body.email,
+        username: req.body.username,
         password: req.body.password  // password will be hashed by middleware
       });
       await user.save();
