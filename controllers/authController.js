@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const passport = require('passport');
+const bcrypt = require('bcryptjs');
 
 // Display sign-up form
 exports.sign_up_get = (req, res) => {
@@ -24,14 +25,18 @@ exports.sign_up_post = [
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.render('auth/sign-up', { errors: errors.array(), user: req.body });
+      return res.render('sign-up', { errors: errors.array(), user: req.body });
     }
     try {
+
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+
       const user = new User({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         username: req.body.username,
-        password: req.body.password  // password will be hashed by middleware
+        password: hashedPassword,  // password will be hashed by middleware
       });
       await user.save();
       res.redirect('/auth/log-in');
@@ -43,13 +48,13 @@ exports.sign_up_post = [
 
 // Display login form
 exports.log_in_get = (req, res) => {
-  res.render('login');
+  res.render('log-in');
 };
 
 // Handle login form submission
 exports.log_in_post = passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/login',
+  failureRedirect: '/log-in',
   failureFlash: true
 });
 

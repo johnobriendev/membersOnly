@@ -2,13 +2,13 @@ extends layout
 
 block content
   h1 Sign Up
-  form(action="auth/sign-up" method="POST")
+  form(action="/auth/sign-up" method="POST")
     div
-      label(for="firstName") First Name:
-      input(type="text" name="firstName" required)
+      label(for="first_name") First Name:
+      input(type="text" name="first_name" required)
     div
-      label(for="lastName") Last Name:
-      input(type="text" name="lastName" required)
+      label(for="last_name") Last Name:
+      input(type="text" name="last_name" required)
     div
       label(for="username") Username:
       input(type="text" name="username" required)
@@ -26,4 +26,4 @@ block content
         li= error.msg
 
   a(href='/') Homepage 
-  a(href='/auth/login') Log In
+  a(href='/auth/log-in') Log In
