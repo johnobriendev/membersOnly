@@ -24,7 +24,7 @@ exports.sign_up_post = [
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.render('sign-up', { errors: errors.array(), user: req.body });
+      return res.render('auth/sign-up', { errors: errors.array(), user: req.body });
     }
     try {
       const user = new User({
@@ -34,7 +34,7 @@ exports.sign_up_post = [
         password: req.body.password  // password will be hashed by middleware
       });
       await user.save();
-      res.redirect('/log-in');
+      res.redirect('/auth/log-in');
     } catch (err) {
       next(err);
     }

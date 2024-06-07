@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Sign Up
-  form(action="/sign-up" method="POST")
+  form(action="auth/sign-up" method="POST")
     div
       label(for="firstName") First Name:
       input(type="text" name="firstName" required)
@@ -10,8 +10,8 @@ block content
       label(for="lastName") Last Name:
       input(type="text" name="lastName" required)
     div
-      label(for="username") Username (Email):
-      input(type="email" name="username" required)
+      label(for="username") Username:
+      input(type="text" name="username" required)
     div
       label(for="password") Password:
       input(type="password" name="password" required)
