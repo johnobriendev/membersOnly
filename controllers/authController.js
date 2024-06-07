@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
-const passport = require('passport');
+const passport = require('../config/passport');
 const bcrypt = require('bcryptjs');
 
 // Display sign-up form
