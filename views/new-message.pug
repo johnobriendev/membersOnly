@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+
+  form(action="/messages/new" method="POST")
+    div
+      label(for="title") Title:
+      input(type="text" name="title" required)
+    div
+      label(for="text") Message:
+      textarea(name="text" required)
+    div
+      button(type="submit") Submit
