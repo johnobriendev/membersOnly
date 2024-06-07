@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('../models/user');
 const { body, validationResult } = require('express-validator');
 const passport = require('../config/passport');
 const bcrypt = require('bcryptjs');
@@ -55,7 +55,7 @@ exports.log_in_get = (req, res) => {
 exports.log_in_post = passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/log-in',
-  failureFlash: true
+  failureMessage: "invalid username or password"
 });
 
 // Handle logout
