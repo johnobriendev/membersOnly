@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1 Join the Club
+  form(action="/users/join" method="POST")
+    div
+      label(for="passcode") Secret Passcode:
+      input(type="text" name="passcode" required)
+    div
+      button(type="submit") Join
+  if errors
+    ul
+      each error in errors
+        li= error.msg
