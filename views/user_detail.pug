@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1 User Profile
+  p Username: #{user.username}
+  p Admin: #{user.isAdmin ? 'Yes' : 'No'}
+  p Member: #{user.isMember ? 'Yes' : 'No'}
+  h2 Messages Posted by #{user.username}
+  ul
+    each message in messages
+      li= message.text
