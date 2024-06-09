@@ -19,3 +19,23 @@ exports.new_message_post = async (req, res, next) => {
     next(err);
   }
 };
+
+// Display all messages
+exports.message_list = async (req, res, next) => {
+  try {
+    const messages = await Message.find().populate('author').exec();
+    res.render('index', { title: 'All Messages', messages });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+// Handle message deletion
+exports.message_delete_post = async (req, res, next) => {
+  try {
+    await Message.findByIdAndRemove(req.params.id).exec();
+    res.redirect('/');
+  } catch (err) {
+    return next(err);
+  }
+};
