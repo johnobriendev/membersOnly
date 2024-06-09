@@ -9,4 +9,8 @@ router.get('/join', isAuthenticated, userController.join_get);
 // Handle join form submission
 router.post('/join', isAuthenticated, userController.join_post);
 
+// New admin routes
+router.get('/admin', isAuthenticated, userController.admin_get);
+router.post('/admin', isAuthenticated, userController.admin_post);
+
 module.exports = router;
