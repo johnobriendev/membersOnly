@@ -32,7 +32,7 @@ exports.admin_get = (req, res) => {
 }
 
 exports.admin_post = [
-  body('admin_passcode').trim().equals(SECRET_ADMIN_PASSCODE).withMessage('Incorrect admin passcode'),
+  body('admin_passcode').trim().equals(ADMIN_PASS).withMessage('Incorrect admin passcode'),
 
   async (req, res, next) => {
     const errors = validationResult(req);
