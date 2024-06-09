@@ -33,7 +33,7 @@ exports.message_list = async (req, res, next) => {
 // Handle message deletion
 exports.message_delete_post = async (req, res, next) => {
   try {
-    await Message.findByIdAndRemove(req.params.id).exec();
+    await Message.findByIdAndDelete(req.params.id).exec();
     res.redirect('/');
   } catch (err) {
     return next(err);

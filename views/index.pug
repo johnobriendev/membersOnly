@@ -14,12 +14,7 @@ block content
       a(href="/messages/new") Create New Message
     p
       a(href="/auth/log-out") Log Out
-  else
-    p
-      a(href="/auth/sign-up") Sign Up
-    p
-      a(href="/auth/log-in") Log In
-  ul
+    ul
     each message in messages
       li= message.title
       p= message.text
@@ -29,3 +24,12 @@ block content
       else
         p Author: Hidden
         p Date: Hidden
+      if user && user.isAdmin
+          form(action=`/messages/${message._id}/delete` method="POST")
+            button(type="submit") Delete
+  else
+    p
+      a(href="/auth/sign-up") Sign Up
+    p
+      a(href="/auth/log-in") Log In
+  

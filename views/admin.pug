@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Become an Admin
-  form(action="/auth/admin" method="POST")
+  form(action="/users/admin" method="POST")
     div
       label(for="admin_passcode") Admin Passcode:
       input(type="password" name="admin_passcode" required)
