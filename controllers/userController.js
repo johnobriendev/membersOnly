@@ -1,8 +1,34 @@
+const User = require('../models/user');
+const Message = require('../models/message');
+
 
 const { body, validationResult } = require('express-validator');
 
 const SECRET_PASSCODE = process.env.SECRET_PASSCODE ;
 const ADMIN_PASS = process.env.ADMIN_PASS;
+
+// Display list of all users
+exports.users_list = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    res.render('users_list', { users });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// Display detail page for a specific user
+exports.user_detail = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const messages = await Message.find({ author: user._id });
+    res.render('user_detail', { user, messages });
+  } catch (err) {
+    next(err);
+  }
+};
+
+
 
 exports.join_get = (req, res) => {
   res.render('join', { title: 'Join the Club' });
