@@ -21,7 +21,7 @@ block content
     each message in messages
       li= message.title
       p= message.text
-      if user
+      if user && user.isMember
         p= `By: ${message.author.username}`
         p= `Date: ${message.createdAt}`
       else
