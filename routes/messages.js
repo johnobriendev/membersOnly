@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const isAuthenticated = require('../middleware/isAuth');
+const {isAuthenticated} = require('../middleware/isAuth');
 const messagesController = require('../controllers/messagesController');
 
 // Display new message form

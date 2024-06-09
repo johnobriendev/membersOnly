@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-const isAuthenticated = require('../middleware/isAuth');
+const {isAuthenticated, isAdmin} = require('../middleware/isAuth');
 
 // Display join form
 router.get('/join', isAuthenticated, userController.join_get);
