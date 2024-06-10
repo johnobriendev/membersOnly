@@ -1,0 +1,42 @@
+extends layout
+
+block content
+
+  h1 Welcome to #{title}
+
+  if user
+    p Welcome, #{user.first_name}
+
+    p
+      a(href="/users") Users List
+    p
+      a(href="/users/join") Join Club
+    p
+      a(href="/users/admin") Become an Admin  
+    p
+      a(href="/messages") View all messages 
+    p
+      a(href="/messages/new") Create New Message
+    p
+      a(href="/auth/log-out") Log Out
+    p 
+      a(href='/') Home
+    ul
+    each message in messages
+      li= message.title
+      p= message.text
+      if user && user.isMember
+        p= `By: ${message.author.username}`
+        p= `Date: ${message.formattedTimestamp}`
+      else
+        p Author: Hidden
+        p Date: Hidden
+      if user && user.isAdmin
+          form(action=`/messages/${message._id}/delete` method="POST")
+            button(type="submit") Delete
+  else
+    p
+      a(href="/auth/sign-up") Sign Up
+    p
+      a(href="/auth/log-in") Log In
+  

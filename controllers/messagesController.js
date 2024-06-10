@@ -24,7 +24,11 @@ exports.new_message_post = async (req, res, next) => {
 exports.message_list = async (req, res, next) => {
   try {
     const messages = await Message.find().populate('author').exec();
-    res.render('index', { title: 'All Messages', messages });
+    res.render('message_list', { 
+      title: 'All Messages', 
+      messages: messages,
+      user: req.user,
+    });
   } catch (err) {
     return next(err);
   }
