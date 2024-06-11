@@ -7,6 +7,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const passport = require('passport');
 var path = require('path');
+const compression = require("compression");
+const helmet = require("helmet");
 
 
 //Routers
@@ -17,6 +19,12 @@ var messagesRouter = require('./routes/messages');
 
 
 var app = express();
+
+const RateLimit = require("express-rate-limit");
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 50,
+});
 
 //connect to mongodb 
 const mongoDb = process.env.MONGODB_URI;
@@ -56,6 +64,10 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
+
+app.use(compression()); // Compress all routes
+app.use(helmet());
+app.use(limiter);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
